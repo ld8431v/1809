@@ -1,0 +1,28 @@
+import random
+import time
+
+rand_file = open("listnumbers.txt", "w")        
+
+for i in range(int(input('How many to generate: '))):  
+    line = str(random.randint(0, 5000)) + "\n"      
+    rand_file.write(line)                           
+    print(line)
+
+rand_file.close()
+start_time = time.time()    
+
+with open("listnumbers.txt", 'r') as f:     
+    n = [line.strip() for line in f]        
+    l_result = []                           
+    for items in n:
+        sum_of_digits = 0
+        for digit in str(items):
+            sum_of_digits += int(digit)             
+            result = [items, sum_of_digits]        
+        l_result.append(result)
+
+l_result.sort(key=lambda x: x[1])      
+print(l_result)
+
+end_time = time.time()                  
+print("\n\nTime taken to sort = " + str(end_time - start_time))
